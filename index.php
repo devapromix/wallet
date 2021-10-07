@@ -8,6 +8,13 @@ if ($add_product_id > 0) {
 	$_SESSION['cart'][$add_product_id] = 1;
 }
 
+$file = file("counter.txt");
+$counter = implode("", $file);
+$counter++;
+$myfile = fopen("counter.txt","w");
+fputs($myfile,$counter);
+fclose($myfile);
+
 include('header.php');
 
 ?>
@@ -59,7 +66,7 @@ include('header.php');
 								if ($_SESSION['cart'][pathinfo($filename, PATHINFO_FILENAME)] > 0) {
 									$p .= '<a class="btn btn-outline-dark mt-auto" href="cart.php">Переглянути кошик</a>';									
 								} else {
-									$p .= '<a class="btn btn-outline-dark mt-auto" href="index.php?add='.pathinfo($filename, PATHINFO_FILENAME).'">В кошик</a>';
+									$p .= '<a class="btn btn-outline-dark mt-auto" href="index.php?add='.pathinfo($filename, PATHINFO_FILENAME).'">Додати в кошик</a>';
 								}
 								$p .= '</div>';
                             $p .= '</div>';
@@ -75,5 +82,5 @@ include('header.php');
                 </div>
             </div>
         </section>
-		<?php echo file_get_contents('footer.html')?>
+		<?php include('footer.php'); ?>
 
